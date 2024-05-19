@@ -44,7 +44,7 @@ const SignupForm = () => {
       {/* form feilds for step 1 */}
       {step === 1 && (
         <View className='mt-3'>
-          <Text className='text-lg font-normal text-gray-600 mb-5'>Step 1: Enter your Basic Information</Text>
+          <Text className='text-md font-normal text-gray-600 mb-5'>Step 1: Enter your Basic Information</Text>
 
           <View className="gap-2 mb-5">
             <Text className="text-black text-md">First Name</Text>
@@ -92,7 +92,7 @@ const SignupForm = () => {
       {/* form feilds for step 2 */}
       {step === 2 && (
         <View className='mt-3'>
-          <Text className='text-lg font-normal text-gray-600 mb-5'>Step 2: Enter your Address Information</Text>
+          <Text className='text-md font-normal text-gray-600 mb-5'>Step 2: Enter your Address Information</Text>
           
           <View className="gap-2 mb-5">
             <Text className="text-black text-md">Address</Text>
@@ -139,7 +139,7 @@ const SignupForm = () => {
       {/* form feilds for step 3 */}
       {step === 3 && (
         <View className='mt-3'>
-          <Text className='text-lg font-normal text-gray-600 mb-5'>Step 3: Enter your Additional Information</Text>
+          <Text className='text-md font-normal text-gray-600 mb-5'>Step 3: Enter your Additional Information</Text>
          
           <View className="gap-2 mb-5">
             <Text className="text-black text-md">Date of Birth</Text>
