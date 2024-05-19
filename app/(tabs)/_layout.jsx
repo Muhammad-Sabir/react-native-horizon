@@ -18,8 +18,8 @@ const PatientLayout = () => {
                     tabBarIcon: ({ focused }) => {
                         return (
                             <View className='items-center justify-center'>
-                                <Home2 size= {28} color={focused ? '#2E90FA' : 'gray'}/>
-                                <Text className={`text-sm ${focused ? 'text-blue-500' : 'text-gray-500'}`}>Home</Text>
+                                <Home2 size={28} color={focused ? '#0179FE' : 'gray'} />
+                                <Text className={`text-sm ${focused ? 'text-bankGradient' : 'text-gray-500'}`}>Home</Text>
                             </View>
                         )
                     }
@@ -32,8 +32,8 @@ const PatientLayout = () => {
                     tabBarIcon: ({ focused }) => {
                         return (
                             <View className='items-center justify-center'>
-                                <DollarCircle size= {28} color={focused ? '#2E90FA' : 'gray'}/>
-                                <Text className={`text-sm ${focused ? 'text-blue-500' : 'text-gray-500'}`}>Banks</Text>
+                                <DollarCircle size={28} color={focused ? '#0179FE' : 'gray'} />
+                                <Text className={`text-sm ${focused ? 'text-bankGradient' : 'text-gray-500'}`}>Banks</Text>
                             </View>
                         )
                     }
@@ -43,10 +43,10 @@ const PatientLayout = () => {
             <Tabs.Screen
                 name="transactionHistory"
                 options={{
-                    tabBarIcon: ({}) => {
+                    tabBarIcon: () => {
                         return (
-                            <View className='items-center justify-center bg-blue-500 rounded-full' style={{width: 60, height: 60,  top: -17}}>
-                                <ReceiptItem size={28} color={"white"}/>
+                            <View className='items-center justify-center bg-bankGradient rounded-full' style={{ width: 60, height: 60, top: -17 }}>
+                                <ReceiptItem size={28} color={"white"} />
                             </View>
                         )
                     }
@@ -59,8 +59,8 @@ const PatientLayout = () => {
                     tabBarIcon: ({ focused }) => {
                         return (
                             <View className='items-center justify-center'>
-                                <MoneySend size= {28} color={focused ? '#2E90FA' : 'gray'}/>
-                                <Text className={`text-sm ${focused ? 'text-blue-500' : 'text-gray-500'}`}>Payment</Text>
+                                <MoneySend size={28} color={focused ? '#0179FE' : 'gray'} />
+                                <Text className={`text-sm ${focused ? 'text-bankGradient' : 'text-gray-500'}`}>Payment</Text>
                             </View>
                         )
                     }
@@ -73,8 +73,8 @@ const PatientLayout = () => {
                     tabBarIcon: ({ focused }) => {
                         return (
                             <View className='items-center justify-center'>
-                                <CardAdd size= {28} color={focused ? '#2E90FA' : 'gray'}/>
-                                <Text className={`text-sm ${focused ? 'text-blue-500' : 'text-gray-500'}`}>Connect</Text>
+                                <CardAdd size={28} color={focused ? '#0179FE' : 'gray'} />
+                                <Text className={`text-sm ${focused ? 'text-bankGradient' : 'text-gray-500'}`}>Connect</Text>
                             </View>
                         )
                     }
