@@ -17,7 +17,7 @@ const signIn = () => {
   const handleLogin = async () => {
     try {
       await login(formData.email, formData.password);
-      router.replace("(tabs)");
+      router.replace("/(tabs)");
     } catch (error) {
       console.error("Failed to log in. Please check your email and password.");
     }

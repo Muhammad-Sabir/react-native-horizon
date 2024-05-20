@@ -8,16 +8,16 @@ const MainLayout = () => {
   const { currentUser } = useAuth();
 
   useEffect(() => {
-    if (currentUser) {
-      router.push('(tabs)');
-    } else {
-      router.push('index');
+    if (currentUser){
+      router.dismissAll()
+      router.replace('/(tabs)')
+      console.log(currentUser.email)
     }
-  }, [currentUser, router]);
+   }, [currentUser])
 
   return (
     <Stack>
-       <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="signIn" options={{ headerShown: false }} />
       <Stack.Screen name="signUp" options={{ headerShown: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
