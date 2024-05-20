@@ -1,14 +1,35 @@
-import { Stack } from 'expo-router';
-import '../global.css'
+import React, { useEffect } from 'react';
+import { Stack, useRouter } from 'expo-router';
+import { AuthProvider, useAuth } from '../contexts/AuthContext.js';
+import '../global.css';
 
-export default function RootLayout() {
+const MainLayout = () => {
+  const router = useRouter();
+  const { currentUser } = useAuth();
+
+  useEffect(() => {
+    if (currentUser) {
+      router.push('(tabs)');
+    } else {
+      router.push('index');
+    }
+  }, [currentUser, router]);
 
   return (
-      <Stack>
-        <Stack.Screen name="index" options={{headerShown: false}} />
-        <Stack.Screen name="signIn" options={{headerShown: false}}/>
-        <Stack.Screen name="signUp" options={{headerShown: false}}/>
-        <Stack.Screen name="(tabs)" options={{headerShown: false}}/>
-      </Stack>
+    <Stack>
+       <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen name="signIn" options={{ headerShown: false }} />
+      <Stack.Screen name="signUp" options={{ headerShown: false }} />
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+     
+    </Stack>
+  );
+};
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <MainLayout />
+    </AuthProvider>
   );
 }

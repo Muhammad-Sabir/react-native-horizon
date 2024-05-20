@@ -1,28 +1,58 @@
-import React, { useState } from "react";
-import { View, Text, TextInput, Image, TouchableOpacity } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import { useAuth } from '../contexts/AuthContext';
+import { addDoc, collection } from 'firebase/firestore';
+import { auth, db } from '../firebase';
 
 const SignupForm = () => {
+  const { signup } = useAuth();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    address: "",
-    city: "",
-    state: "",
-    postalCode: "",
-    dateOfBirth: "",
-    ssn: "",
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    address: '',
+    city: '',
+    region: '',
+    postalCode: '',
+    dateOfBirth: '',
+    cnicNo: '',
+    phoneNumber: ''
   });
 
   const handleNext = () => setStep(step + 1);
   const handleBack = () => setStep(step - 1);
 
-  const handleSubmit = () => {
-    console.log(formData);
+  const handleSubmit = async () => {
+    try {
+
+      const userCredential = await signup(formData.email, formData.password);
+      const user = userCredential.user;
+
+      await addDoc(collection(db, 'users'), {
+        userId: user.uid,
+        firstName: formData.firstName || '',
+        lastName: formData.lastName || '',
+        email: formData.email || '',
+        password: formData.password || '',
+        address: formData.address || '',
+        city: formData.city || '',
+        region: formData.region || '',
+        postalCode: formData.postalCode || '',
+        dateOfBirth: formData.dateOfBirth || '',
+        cnicNo: formData.cnicNo || '',
+        phoneNumber: formData.phoneNumber || ''
+      });
+
+      console.log("User signed up successfully and data stored in Firestore!");
+
+    } catch (error) {
+      console.error("Error signing up:", error.message);
+    }
   };
+
 
   return (
     <View className="w-full h-full p-4 bg-white">
@@ -127,12 +157,12 @@ const SignupForm = () => {
           </View>
 
           <View className="gap-2 mb-5">
-            <Text className="text-black text-md">State</Text>
+            <Text className="text-black text-md">Region</Text>
             <TextInput
               className="w-full px-2 py-2 border border-gray-300 rounded-lg text-md"
-              placeholder="Enter your State"
-              value={formData.state}
-              onChangeText={(text) => setFormData({ ...formData, state: text })}
+              placeholder="Enter your Region"
+              value={formData.region}
+              onChangeText={(text) => setFormData({ ...formData, region: text })}
             />
           </View>
 
@@ -170,12 +200,23 @@ const SignupForm = () => {
           </View>
 
           <View className="gap-2 mb-5">
-            <Text className="text-black text-md">SSN</Text>
+            <Text className="text-black text-md">CNIC No</Text>
             <TextInput
               className="w-full px-2 py-2 border border-gray-300 rounded-lg text-md"
-              placeholder="Enter your SSN"
-              value={formData.ssn}
-              onChangeText={(text) => setFormData({ ...formData, ssn: text })}
+              placeholder="Enter your CNIC No"
+              value={formData.cnicNo}
+              onChangeText={(text) => setFormData({ ...formData, cnicNo: text })}
+              secureTextEntry
+            />
+          </View>
+
+          <View className="gap-2 mb-5">
+            <Text className="text-black text-md">Phone Number</Text>
+            <TextInput
+              className="w-full px-2 py-2 border border-gray-300 rounded-lg text-md"
+              placeholder="Enter your Phone Number"
+              value={formData.phoneNumber}
+              onChangeText={(text) => setFormData({ ...formData, phoneNumber: text })}
               secureTextEntry
             />
           </View>

@@ -1,13 +1,29 @@
 import React from "react";
 import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
 import { Link } from "expo-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
+import { useAuth } from "../contexts/AuthContext"; 
 
 const signIn = () => {
   const router = useRouter();
   const [user, setUser] = useState(null);
+  const { login, currentUser } = useAuth();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
+  const handleLogin = async () => {
+    try {
+      await login(formData.email, formData.password);
+      router.replace("(tabs)");
+    } catch (error) {
+      console.error("Failed to log in. Please check your email and password.");
+    }
+  };
+
+  
   return (
     <View className="w-full h-full p-4 bg-white">
       {/*Logo */}
@@ -39,6 +55,8 @@ const signIn = () => {
             <TextInput
               className="w-full px-2 py-2 border border-gray-300 rounded-lg text-md"
               placeholder="Enter your email"
+              value={formData.email}
+              onChangeText={(text) => setFormData({ ...formData, email: text })}
             />
           </View>
 
@@ -49,10 +67,12 @@ const signIn = () => {
               placeholder="Enter your password"
               secureTextEntry={true}
               autoCapitalize="none"
+              value={formData.password}
+              onChangeText={(text) => setFormData({ ...formData, password: text })}
             />
           </View>
 
-          <TouchableOpacity onPress={() => router.push("(tabs)")}>
+          <TouchableOpacity onPress={handleLogin}>
             <View className="items-center justify-center w-full p-3 mt-4 mb-5 rounded-lg bg-bankGradient h-14">
               <Text className="m-1 text-center text-white text-md">Login</Text>
             </View>
